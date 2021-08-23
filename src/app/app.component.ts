@@ -1,3 +1,4 @@
+import { MyServiceService } from './my-service.service';
 import { ChangeDetectorRef, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, Subject } from 'rxjs';
@@ -10,50 +11,26 @@ import { BehaviorSubject, Subject } from 'rxjs';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private myService: MyServiceService) {
+    this.majorGenre = this.myService.majorGenre;
+    this.minorGenre = this.myService.minorGenre;
+    this.language = this.myService.language;
+    this.subMinorGenre = this.myService.subMinorGenre;
+    this.genres = this.myService.genres;
   }
 
   /** Declarations and initializing variables */
   selected = ''
-  genres = ['Web Film', 'Web Series'];
+  majorGenre;
+  language;
+  genres;
+  minorGenre;
+  subMinorGenre
+  genreType = ''
 
-  genreType = 'uhgi'
-  movieForm = new FormGroup({
-    filmname: new FormControl(),
-    episode: new FormControl('0'),
-    logline: new FormControl(),
-    duration: new FormControl(),
-    major: new FormControl(),
-    minor: new FormControl(),
-    sub: new FormControl(),
-    seriesname: new FormControl(),
-    genre: new FormControl()
-
-  });
   minorSelection = '';
   majorSelection = ''
   subSelection = ''
-
-  majorGenre = ['Crime',
-    'Comedy',
-    'Drama',
-    'Fantasy',
-    'Kids',
-    'Talk Show',
-    'Game Show',
-    'Reality Show',
-    'Sci-Fi']
-  language = ['English', 'Hindi', 'Telugu']
-  minorGenre = [
-    'Original Series',
-    'Original Film',
-    'Original Non Fiction',
-    'Original Docu Fiction',
-    'Acquired Film Theatrical',
-    'Acquired Film Digital',
-    'Acquired Film Dubbed',
-    'Acquired Web series'];
-  subMinorGenre = [' abc', 'def', 'ghi', 'jkl']
 
   filePicked = false
   biblefileNames: string[] = []
@@ -63,6 +40,7 @@ export class AppComponent implements OnInit {
   genre = 'webfilm';
 
   biblefileAr: File[] = []
+  movieForm!: FormGroup;
 
   ngOnInit() {
 
@@ -80,17 +58,16 @@ export class AppComponent implements OnInit {
       checkbox: ['', Validators.required],
     })
 
-    // console.log(this.movieForm.get('filmname'))
 
   }
 
-  changeGenre(eve: any) {
+  changeGenre(eve: string) {
     /** returns the major genre type */
     console.log(eve);
-    if (eve == 'Web Film') {
+    if (eve === 'Web Film') {
       this.genreType = 'webfilm'
     }
-    else if (eve == 'Web Series') {
+    else if (eve === 'Web Series') {
       this.genreType = 'series'
     }
   }
@@ -101,7 +78,7 @@ export class AppComponent implements OnInit {
   }
 
 
-  submitForm(form: any) {
+  submitForm(form: []) {
     //called when submiting the form
     console.log(form);
 
@@ -112,7 +89,7 @@ export class AppComponent implements OnInit {
   }
 
 
-  addFile(type: any) {
+  addFile(type: string) {
     /** called each when a file is added */
     // console.log(type);
     this.type = type;
@@ -129,7 +106,7 @@ export class AppComponent implements OnInit {
 
     if (file) {
       // extensions for documents support
-      let types = [
+      const types = [
         ".pdf",
         ".doc",
         ".docx",
@@ -161,7 +138,7 @@ export class AppComponent implements OnInit {
         alert('Format Not supported')
       }
 
-      if (this.type == 'bible') {
+      if (this.type === 'bible') {
         if (this.biblefileNames.length > 1) {
           alert('You cannot upload more than 2 files at once');
           return
@@ -169,7 +146,7 @@ export class AppComponent implements OnInit {
         this.biblefileAr.push(file[io]);
         this.biblefileNames.push(file[io].name)
       }
-      else if (this.type == 'screen') {
+      else if (this.type === 'screen') {
         if (this.screenfileNames.length > 1) {
           alert('You cannot upload more than 2 files at once');
           return
