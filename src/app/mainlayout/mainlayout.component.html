@@ -1,0 +1,151 @@
+<app-navbar></app-navbar>
+<div class="d-flex">
+    <app-leftsidebar></app-leftsidebar>
+    <form [formGroup]="movieForm">
+
+        <!-- Genre dropdown -->
+        <div class="divAll">
+            <label class="labelAll"> Film Type</label>
+
+            <select (change)="changeGenre(selected)" [(ngModel)]="selected" class="form-control selectAll" formControlName="genre">
+                <option>Select film type</option>
+                <option *ngFor="let gen of genres">{{gen}}</option>
+            </select>
+        </div>
+
+
+        <!-- Name -->
+        <div *ngIf="genreType=='webfilm'" class="divAll form-group">
+            <label for="" class="labelAll">Film Name</label>
+            <input type="text" formControlName="filmname" class=" selectAll form-control" placeholder="Enter Name">
+        </div>
+        <span class="redC" *ngIf="f.filmname.touched && f.filmname.invalid">
+            *Film name is invalid
+        </span>
+
+        <!-- Series Name -->
+        <div *ngIf="genreType=='series'" class="divAll form-group">
+            <label for="" class="labelAll">Series/Title Name</label>
+            <input type="text" formControlName="seriesname" class=" selectAll form-control" placeholder="Enter Series Name">
+        </div>
+        <span class="redC" *ngIf="f.seriesname.touched && f.seriesname.invalid">
+            *Series name is invalid
+        </span>
+
+        <!-- Episodes -->
+        <div *ngIf="genreType=='series'" class="divAll">
+            <label for="" class="labelAll"> Number of Episodes </label>
+            <input type="number" class="selectAll form-control" formControlName="episode" placeholder="Enter Number">
+        </div>
+
+        <!-- LogLine -->
+        <div class="divAll">
+
+            <label for="" class="labelAll"> Logline</label>
+            <input type="text" class=" selectAll form-control" formControlName="logline" placeholder="Enter description">
+        </div>
+        <span class="redC" *ngIf="f.logline.touched && f.logline.invalid">
+            *Log Line is invalid
+        </span>
+
+        <!-- Language -->
+        <div class="divAll">
+            <label for="" class="labelAll">Language</label>
+            <select class="form-control selectAll">
+                <option>Select Language</option>
+                <option *ngFor="let lang of language">{{lang}}</option>
+            </select>
+        </div>
+
+        <!-- Major Genres -->
+        <div class="divAll">
+            <label for="" class="labelAll">Major Genres</label>
+            <select class="form-control selectAll" formControlName="major">
+                <option>Select Major Genres</option>
+                <option *ngFor="let major of majorGenre">{{major}}</option>
+            </select>
+        </div>
+
+        <!-- Minor Genres -->
+        <div class="divAll">
+            <label for="" class="labelAll">Minor Genres</label>
+            <select class="form-control selectAll " formControlName="minor">
+                <option>Select Minor Genres</option>
+                <option *ngFor="let minor of minorGenre">{{minor}}</option>
+            </select>
+        </div>
+
+        <!-- Sub Minor Genres -->
+        <div class="divAll">
+            <label for="" class="labelAll">Sub Minor Genres</label>
+            <select class="form-control selectAll" formControlName="sub">
+                <option>Select Sub Minor Genres</option>
+                <option *ngFor="let sub of subMinorGenre">{{sub}}</option>
+            </select>
+        </div>
+
+        <!-- Duration -->
+        <div class="divAll">
+            <label for="" class="labelAll"> Duration of Film(mins)</label>
+            <input type="number" class=" selectAll form-control" formControlName="duration" placeholder="Enter duration">
+        </div>
+        <span class="redC" *ngIf="f.duration.touched && f.duration.invalid">
+            *Duration is invalid
+        </span>
+
+        <!-- Upload Bible -->
+        <div class="divAll">
+            <label for="" class="labelAll"> Upload Bible</label>
+            <img class="imgSize" src="../assets/download2.png" (click)="addFile('bible')" alt="">
+            <input type="file" id="myFile1" multiple (input)="onFilePicked($event)" accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf" style="display: none;" />
+
+            <div class="px-1" *ngFor="let name of biblefileNames">
+                <span (click)="openPdf('bible',name)">
+                    {{name}}
+                </span>
+                <!-- <img *ngIf="canDeleteNow" class="imgSize" (click)="removeFile('bible',name)" src="../../assets/delete.png" alt=""> -->
+            </div>
+        </div>
+
+        <!-- Upload Screenplay -->
+        <div class="divAll">
+            <label for="" class="labelAll"> Upload ScreenPlay</label>
+            <img class="imgSize" src="../assets/download2.png" alt="" (click)="addFile('screen')">
+            <input type="file" id="myFile2" multiple (input)="onFilePicked($event)" accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf" style="display: none;" />
+            <div class="px-1" *ngFor="let name of screenfileNames">
+                <span (click)="openPdf('screen',name)">{{name}}</span>
+                <!-- <img *ngIf="canDeleteNow" class="imgSize" (click)="removeFile('screen',name)" src="../../assets/delete.png" alt=""> -->
+
+            </div>
+        </div>
+
+
+        <div class="divAll">
+            <input type="checkbox" class="m-2" formControlName="checkbox">
+            <label for="" class=""> Accept terms and conditions</label>
+        </div>
+
+        <!-- <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="picker">
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <button mat-raised-button (click)="picker.open()">Open</button> -->
+
+        <!-- Submit button -->
+        <div [disabled]="!movieForm.valid" class="text-center">
+            <button (click)="submitForm(movieForm)" class="btn btn-primary">Submit</button>
+        </div>
+
+    </form>
+
+
+
+</div>
+{{pdfOpened}}
+<div *ngIf="pdfOpened">
+    <iframe id="ifrm" style="width: 100%; height: 100%;"></iframe>
+
+    <!-- <pdf-viewer [src]="previewUrl" [original-size]="false">ffffff</pdf-viewer> -->
+    <!-- <img id="ifrm" alt=""> -->
+</div>
