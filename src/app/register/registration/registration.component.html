@@ -1,0 +1,91 @@
+<div>
+    <form [formGroup]="registerForm">
+
+        <!-- Full Name -->
+        <div class="divAll">
+            <label class="labelAll"> Full Name</label>
+            <input type="text" class=" selectAll form-control" formControlName="fullname" placeholder="Enter Name">
+        </div>
+        <span class="redC" *ngIf="f.fullname.touched && f.fullname.invalid">
+            *Full name is invalid
+        </span>
+
+        <!-- Email -->
+        <div class="divAll">
+            <label for="" class="labelAll"> Email id</label>
+            <input type="text" class=" selectAll form-control" formControlName="email" placeholder="Enter Email id">
+        </div>
+        <span class="redC" *ngIf="f.email.touched && f.email.invalid">
+            *Email id is invalid
+        </span>
+
+        <!-- Mobile Number -->
+        <div class="divAll">
+            <label for="" class="labelAll"> Mobile Number</label>
+            <input type="number" class=" selectAll form-control" formControlName="mobile" placeholder="Enter Mobile Number">
+        </div>
+        <span class="redC" *ngIf="f.mobile.touched && f.mobile.invalid">
+            *Mobile Number is invalid
+        </span>
+
+        <div class="divAll">
+            <label class="labelAll"> Dob</label>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Choose a date</mat-label>
+                <input class="form-control" matInput [matDatepicker]="picker">
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <button (click)="picker.open()">Choose date</button>
+        </div>
+
+        <!-- Password -->
+        <div class="divAll">
+            <label for="" class="labelAll"> Password</label>
+            <input type="password" class=" selectAll form-control" formControlName="password" placeholder="Enter Password">
+        </div>
+        <span class="redC" *ngIf="f.password.touched && f.password.invalid">
+            *Password is invalid
+        </span>
+
+
+        <div class="divAll">
+            <label class="labelAll"> Gender</label>
+            <select (change)="changegender(selected)" [(ngModel)]="selected" class="form-control selectAll" formControlName="gender">
+                <option>Select Gender</option>
+                <option *ngFor="let gen of gender">{{gen}}</option>
+            </select>
+        </div>
+
+
+        <!-- Invite Code -->
+        <div class="divAll">
+            <label for="" class="labelAll"> Invite Code</label>
+            <input type="text" class="selectAll form-control" formControlName="invitecode" placeholder="Enter Invitation Code">
+        </div>
+        <span class="redC" *ngIf="f.invitecode.touched && f.invitecode.invalid">
+            *Invite Code is invalid
+        </span>
+
+        <div class="divAll">
+            <input type="checkbox" class="m-2" formControlName="checkbox">
+            <label for="" class=""> Accept terms and conditions</label>
+        </div>
+
+
+
+        <!-- Submit button -->
+        <div class="text-center">
+            <!-- [disabled]="!registerForm.valid" -->
+            <button (click)="submitForm(registerForm)" class="btn btn-primary">Submit</button>
+        </div>
+
+
+    </form>
+
+    <div class="divAll d-flex justify-content-center mt-5">
+        <span>Already have an account?</span>
+        <div class="text-center mx-2">
+            <button (click)="login()" class="btn btn-primary">Login</button>
+        </div>
+    </div>
+</div>

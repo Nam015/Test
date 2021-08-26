@@ -1,6 +1,4 @@
-<app-navbar></app-navbar>
-<div class="d-flex">
-    <app-leftsidebar></app-leftsidebar>
+<div>
     <form [formGroup]="movieForm">
 
         <!-- Genre dropdown -->
@@ -103,7 +101,7 @@
                 <span (click)="openPdf('bible',name)">
                     {{name}}
                 </span>
-                <!-- <img *ngIf="canDeleteNow" class="imgSize" (click)="removeFile('bible',name)" src="../../assets/delete.png" alt=""> -->
+                <img *ngIf="canDeleteNow" class="imgSize" (click)="removeFile('bible',name)" src="../../assets/delete.png" alt="">
             </div>
         </div>
 
@@ -114,7 +112,7 @@
             <input type="file" id="myFile2" multiple (input)="onFilePicked($event)" accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf" style="display: none;" />
             <div class="px-1" *ngFor="let name of screenfileNames">
                 <span (click)="openPdf('screen',name)">{{name}}</span>
-                <!-- <img *ngIf="canDeleteNow" class="imgSize" (click)="removeFile('screen',name)" src="../../assets/delete.png" alt=""> -->
+                <img *ngIf="canDeleteNow" class="imgSize" (click)="removeFile('screen',name)" src="../../assets/delete.png" alt="">
 
             </div>
         </div>
@@ -125,27 +123,17 @@
             <label for="" class=""> Accept terms and conditions</label>
         </div>
 
-        <!-- <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Choose a date</mat-label>
-            <input matInput [matDatepicker]="picker">
-            <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-        <button mat-raised-button (click)="picker.open()">Open</button> -->
+
 
         <!-- Submit button -->
-        <div [disabled]="!movieForm.valid" class="text-center">
-            <button (click)="submitForm(movieForm)" class="btn btn-primary">Submit</button>
+        <div class="text-center">
+            <button [disabled]="!movieForm.valid" (click)="submitForm(movieForm)" class="btn btn-primary">Submit</button>
         </div>
 
     </form>
-
-
-
-</div>
-{{pdfOpened}}
-<div *ngIf="pdfOpened">
-    <iframe id="ifrm" style="width: 100%; height: 100%;"></iframe>
-
-    <!-- <pdf-viewer [src]="previewUrl" [original-size]="false">ffffff</pdf-viewer> -->
-    <!-- <img id="ifrm" alt=""> -->
+    <div *ngIf="pdfOpened">
+        <iframe id="ifrm" style="width: 100%; height: 100%;"></iframe>
+        <!-- <pdf-viewer [src]="previewUrl" [original-size]="false">ffffff</pdf-viewer> -->
+        <!-- <img id="ifrm" alt=""> -->
+    </div>
 </div>

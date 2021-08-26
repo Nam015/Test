@@ -9,17 +9,10 @@ import { BehaviorSubject, Subject } from 'rxjs';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
-  constructor(private fb: FormBuilder, private myService: MyServiceService) {
+  constructor() {
+    // console.log('in app ts layout');
 
   }
-
-  ngOnInit() {
-  }
-
-
-
-
-
 }

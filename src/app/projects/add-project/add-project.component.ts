@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
-import { PDFSource } from 'ng2-pdf-viewer';
-import { MyServiceService } from '../my-service.service';
+import { MyServiceService } from 'src/app/my-service.service';
 
 @Component({
-  selector: 'app-mainlayout',
-  templateUrl: './mainlayout.component.html',
-  styleUrls: ['./mainlayout.component.css']
+  selector: 'app-add-project',
+  templateUrl: './add-project.component.html',
+  styleUrls: ['./add-project.component.css']
 })
-export class MainlayoutComponent implements OnInit {
+export class AddProjectComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private myService: MyServiceService,
     private domSanitizer: DomSanitizer) {
@@ -68,7 +67,7 @@ export class MainlayoutComponent implements OnInit {
 
   changeGenre(eve: string) {
     /** returns the major genre type */
-    console.log(eve);
+    // console.log(eve);
     if (eve === 'Web Film') {
       this.genreType = 'webfilm'
     }
@@ -85,7 +84,7 @@ export class MainlayoutComponent implements OnInit {
 
   submitForm(form: FormGroup) {
     //called when submiting the form
-    console.log(form);
+    // console.log(form);
 
     /**contains the file information for both */
     // console.log(this.biblefileAr);
@@ -97,17 +96,17 @@ export class MainlayoutComponent implements OnInit {
 
   addFile(type: string) {
     /** called each when a file is added */
-    console.log(type);
+    // console.log(type);
     this.type = type;
     let element: HTMLElement;
     if (type === 'bible') {
       element = document.getElementById("myFile1") as HTMLElement;
-      console.log(element);
+      // console.log(element);
       element.click();
     }
     else if (type === 'screen') {
       let element: HTMLElement = document.getElementById("myFile2") as HTMLElement;
-      console.log(element);
+      // console.log(element);
       element.click();
     }
   }
@@ -116,13 +115,13 @@ export class MainlayoutComponent implements OnInit {
   pdfOpened = false;
 
   removeFile(type: string, pdfName: string) {
-    console.log('in remove');
-    console.log(type);
-    console.log(pdfName);
+    // console.log('in remove');
+    // console.log(type);
+    // console.log(pdfName);
 
 
-    console.log(this.biblefileAr.values);
-    console.log(this.screenfileAr);
+    // console.log(this.biblefileAr.values);
+    // console.log(this.screenfileAr);
     // console.log(JSON.parse(JSON.stringify(this.biblefileAr[0])));
 
 
@@ -135,7 +134,7 @@ export class MainlayoutComponent implements OnInit {
       this.fileNameArr = this.screenfileNames;
 
     }
-    console.log(this.tempArray);
+    // console.log(this.tempArray);
     for (let i = 0; i < this.tempArray.length; i++) {
       if (pdfName === this.tempArray[i].name) {
         this.tempArray.splice(i, 1);
@@ -150,12 +149,12 @@ export class MainlayoutComponent implements OnInit {
 
       }
     }
-    console.log(this.tempArray);
+    // console.log(this.tempArray);
   }
 
 
   openPdf(type: string, pdfString: string) {
-    console.log('in open pdf');
+    // console.log('in open pdf');
     this.pdfOpened = false;
 
     if (type === 'bible') {
@@ -165,35 +164,22 @@ export class MainlayoutComponent implements OnInit {
       this.tempArray = this.screenfileAr;
     }
     for (let i = 0; i < this.tempArray.length; i++) {
-      console.log(pdfString);
-      console.log(this.tempArray[i].name);
+      // console.log(pdfString);
+      // console.log(this.tempArray[i].name);
       if (pdfString === this.tempArray[i].name) {
         var reader = new FileReader();
         reader.readAsDataURL(this.tempArray[i]);
         reader.onload = (_event) => {
-          console.log(_event);
-          console.log(reader);
+          // console.log(_event);
+          // console.log(reader);
 
           this.previewUrl = (this.domSanitizer.bypassSecurityTrustResourceUrl(JSON.parse(JSON.stringify(reader.result))) as any).changingThisBreaksApplicationSecurity;
-          console.log(this.previewUrl);
-
-          // if (this.ifrm) {
-          //   console.log(this.ifrm);
-          //   console.log(document.getElementById('ifrm'));
+          // console.log(this.previewUrl);
 
 
-          //   document.getElementById('ifrm')!.setAttribute("src", this.previewUrl);
-          // }
+          document.getElementById('ifrm')!.setAttribute("src", this.previewUrl);
 
-          // if (document.getElementById('ifrm')) {
-            document.getElementById('ifrm')!.setAttribute("src", this.previewUrl);
-          // }
-
-
-          // this.previewUrl = this.domSanitizer.bypassSecurityTrustUrl(reader.result);
-
-          // this.previewUrl = reader.result;
-          console.log(reader.result);
+          // console.log(reader.result);
         }
         this.pdfOpened = true
         return
@@ -204,10 +190,10 @@ export class MainlayoutComponent implements OnInit {
   canDeleteNow = false
 
   onFilePicked(event: Event) {
-    console.log(event);
+    // console.log(event);
 
     var file = (event.target as HTMLInputElement).files;
-    console.log(file?.[0])
+    // console.log(file?.[0])
 
 
     if (file) {
@@ -265,8 +251,8 @@ export class MainlayoutComponent implements OnInit {
 
       this.canDeleteNow = true;
 
-      console.log(this.biblefileAr);
-      console.log(this.screenfileAr);
+      // console.log(this.biblefileAr);
+      // console.log(this.screenfileAr);
     }
   }
 }

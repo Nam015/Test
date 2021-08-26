@@ -1,5 +1,7 @@
+import { MyServiceService } from './../../my-service.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -9,12 +11,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistrationComponent implements OnInit {
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private router: Router,
+    private myService: MyServiceService) {
+    // console.log('in registration comp');
+    this.gender = this.myService.gender;
 
+  }
 
+  gender;
+  selected = ''
   registerForm!: FormGroup;
 
   ngOnInit(): void {
+    this.initializeForm();
+  }
+
+  initializeForm() {
     this.registerForm = this.fb.group({
       fullname: ['', Validators.required],
       email: ['', Validators.required],
@@ -27,9 +39,21 @@ export class RegistrationComponent implements OnInit {
     })
   }
 
+  changegender(gender: string) {
+  }
+
   get f() {
     /**returns the form credentials */
     return this.registerForm.controls;
+  }
+
+  submitForm(form: FormGroup) {
+    // console.log(form);
+
+  }
+
+  login() {
+    this.router.navigateByUrl('/register/login');
   }
 
 }

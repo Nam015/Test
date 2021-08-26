@@ -17,6 +17,8 @@ export class MyServiceService {
     'Reality Show',
     'Sci-Fi']
 
+  readonly gender = ['Male', 'Female', 'Others']
+
   readonly minorGenre = [
     'Original Series',
     'Original Film',
@@ -32,6 +34,37 @@ export class MyServiceService {
   readonly subMinorGenre = [' abc', 'def', 'ghi', 'jkl'];
   readonly genres = ['Web Film', 'Web Series'];
 
+  readonly projects = [
+    {
+      'projectname': 'Project 1',
+      'type': 'Book',
+      'source': 'Listening Post',
+      'majorgenre': 'Comedy',
+      'creator': 'XYZ',
+      'email': 'rahul@gmail.com',
+      'status': 'Rejected',
+      'action': 'Approve'
+    },
+    {
+      'projectname': 'Project 1',
+      'type': 'Book',
+      'source': 'Listening Post',
+      'majorgenre': 'Comedy',
+      'creator': 'XYZ',
+      'email': 'rahul@gmail.com',
+      'status': 'Rejected',
+      'action': 'Approve'
+    }, {
+      'projectname': 'Project 1',
+      'type': 'Book',
+      'source': 'Listening Post',
+      'majorgenre': 'Comedy',
+      'creator': 'XYZ',
+      'email': 'rahul@gmail.com',
+      'status': 'Rejected',
+      'action': 'Approve'
+    },
+  ]
 
 
 }

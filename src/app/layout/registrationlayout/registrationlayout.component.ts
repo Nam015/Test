@@ -5,11 +5,6 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './registrationlayout.component.html',
   styleUrls: ['./registrationlayout.component.css']
 })
-export class RegistrationlayoutComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+export class RegistrationlayoutComponent {
 
 }

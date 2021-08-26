@@ -1,0 +1,36 @@
+<!-- Username -->
+<form [formGroup]="loginForm">
+    <div class="divAll">
+        <label for="" class="labelAll"> User Name</label>
+        <input type="text" class=" selectAll form-control" formControlName="username" placeholder="Enter Name">
+    </div>
+    <span class="redC" *ngIf="f.username.touched && f.username.invalid">
+        *Username is invalid
+    </span>
+
+    <!-- Password -->
+    <div class="divAll">
+        <label for="" class="labelAll"> Password</label>
+        <input type="password" class=" selectAll form-control" formControlName="password" placeholder="Enter Password">
+    </div>
+    <span class="redC" *ngIf="f.password.touched && f.password.invalid">
+        *Password is invalid
+    </span>
+
+    <!-- remember me -->
+    <div class="divAll justify-content-around">
+        <div>
+            <input type="checkbox" class="m-2" formControlName="checkbox">
+            <label> Accept terms and conditions</label>
+        </div>
+
+        <span (click)="forgotPass()">Forgot Password</span>
+
+    </div>
+
+    <!-- [disabled]="!loginForm.valid" -->
+    <div class="text-center">
+        <button (click)="submitForm(loginForm)" class="btn btn-primary">Submit</button>
+    </div>
+
+</form>
